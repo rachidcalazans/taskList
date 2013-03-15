@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Linq.Mapping;
-using System.Linq;
-using System.Text;
 
-namespace TaskList.Database
+namespace TaskList.DatabaseAccess
 {
     [Table]
     class SubTask
@@ -17,11 +14,5 @@ namespace TaskList.Database
 
         [Column()]
         public int Status { get; set; }
-
-        [Column(Storage="TaskId")]
-        public int TaskId { get; set; }
-
-        [Association(Storage="SubTaskTaskFK", ThisKey="TaskId", OtherKey="Id", IsForeignKey=true)]
-        public Task Task { get; set; }
     }
 }

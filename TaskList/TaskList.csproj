@@ -49,6 +49,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Phone" />
+    <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Interop" />
     <Reference Include="system.data.linq" />
     <Reference Include="System.Windows" />
@@ -62,10 +63,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Database\Database.cs" />
-    <Compile Include="Database\GpsPoint.cs" />
-    <Compile Include="Database\SubTask.cs" />
-    <Compile Include="Database\Task.cs" />
+    <Compile Include="DatabaseAccess\GpsPoint.cs" />
+    <Compile Include="DatabaseAccess\MyLocalDatabase.cs" />
+    <Compile Include="DatabaseAccess\SubTask.cs" />
+    <Compile Include="DatabaseAccess\Task.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
