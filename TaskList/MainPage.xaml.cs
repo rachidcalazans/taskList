@@ -8,6 +8,7 @@ using System;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using System.Windows.Media;
+using Microsoft.Phone.Shell;
 
 namespace TaskList
 {
@@ -25,7 +26,26 @@ namespace TaskList
                 }
             }
             CarregarLista();
+            //UpdateLiveTiles();
         }
+
+       
+
+
+        private void UpdateLiveTiles()
+        {
+            ShellTile currentTiles = ShellTile.ActiveTiles.First();
+            StandardTileData tilesUpdatedData = new StandardTileData
+            {
+                Title = "Live Tiles ",
+                Count = 10,
+                BackTitle = "Back Title"
+            };
+
+            currentTiles.Update(tilesUpdatedData);
+        }        
+
+
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {

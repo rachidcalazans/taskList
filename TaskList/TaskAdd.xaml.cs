@@ -17,9 +17,32 @@ namespace TaskList
     public partial class TaskAdd : PhoneApplicationPage
     {
         Task task;
+        bool isNewPageInstance = false;
         public TaskAdd()
         {
             InitializeComponent();
+            isNewPageInstance = true;
+        }
+
+        protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            if (e.NavigationMode != System.Windows.Navigation.NavigationMode.Back)
+            {
+                if (task == null)
+                {
+                    task = new Task()
+                    {
+                        Description = txtNameInput.Text,
+                        Status = 0
+                    };
+                    //task.Description = txtNameInput.Text;
+                }
+                //MessageBox.Show("Des. 2: " + task.Description);
+                State["task"] = task;
+
+                //State["task"] = txtNameInput.Text;
+            }
         }
 
         private void btSave_Click_1(object sender, RoutedEventArgs e)
@@ -84,6 +107,20 @@ namespace TaskList
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+
+            if (isNewPageInstance)
+            {
+                if (State.ContainsKey("task"))
+                {
+                    task = (Task)State["task"];
+                    MessageBox.Show("id = " + task.Description);
+                    //string a = State["task"].ToString();
+                    //MessageBox.Show("id = " + a);
+                }
+                DataContext = task;
+            }
+
+            isNewPageInstance = false;
 
             App app = Application.Current as App;
 
