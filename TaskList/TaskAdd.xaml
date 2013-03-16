@@ -13,7 +13,7 @@
     mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True">
 
-    <Grid Name="gridPrincipal">
+    <Grid Name="gridPrincipal" Background="{StaticResource PhoneContrastBackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -21,16 +21,27 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <Border>
+            <Border.Background>
+                <SolidColorBrush Color="#FF162D69"></SolidColorBrush>
+            </Border.Background>
+        </Border>
 
         <TextBlock Grid.Row="0" Name="txtNameTitle" FontSize="40" HorizontalAlignment="Center" Text="Add Task"></TextBlock>
         
-        <Grid Grid.Row="1" Name="inputs">
+        <Grid Grid.Row="1" Name="inputs" Background="#FF353550">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
             <TextBox Grid.Row="0" Name="txtNameInput" Width="402" HorizontalAlignment="Left"/>
-            <Button Name="btSave" Width="95" Height="90" HorizontalAlignment="Right" Click="btSave_Click_1">
+            <Button Name="btSave" Width="95" Height="90" HorizontalAlignment="Right" Click="btSave_Click_1" Foreground="#FF2D993D" Background="#FF44D724" BorderThickness="2,1,1,1">
                 <Image Height="48" Width="48" Grid.Row="0" Source="/Icons/appbar.save.rest.png"></Image>
             </Button>
+            <Button Name="addSubTasks" Grid.Row="1" Visibility="Collapsed" Click="addSubTask_Click">Add New Sub-Task</Button>
         </Grid>
-        <ListBox Name="lstResultado" Grid.Row="3">
+        
+        <ListBox Name="lstResultado" Grid.Row="3" Background="White" Foreground="#FF187D27">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -38,14 +49,18 @@
                             <ColumnDefinition Width="365"/>
                             <ColumnDefinition Width="110"/>
                         </Grid.ColumnDefinitions>
- 
-                        <TextBlock Margin="10" Text="{Binding Description}" Grid.Row="0" Grid.Column="0"/>
-                        <Button Name="btEdit" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Click="btEdit_Click">Edit</Button>
+                        <Border Grid.ColumnSpan="2">
+                            <Border.Background>
+                                <SolidColorBrush Color="#FF66A9EF"></SolidColorBrush>
+                            </Border.Background>
+                        </Border>
+
+                        <TextBlock Foreground="White" FontSize="25" FontWeight="Bold"  Margin="10" Text="{Binding Description}" Grid.Row="0" Grid.Column="0" Tap="TextBlock_Tap_1"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button Name="btLocation" Content="Pick Location" Grid.Row="4" Click="btLocation_Click"/>
+        <Button Name="btLocation" Content="Pick Location" Grid.Row="4" Click="btLocation_Click" Background="#FF006C66"/>
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar>

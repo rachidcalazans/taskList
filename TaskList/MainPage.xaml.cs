@@ -86,10 +86,15 @@ namespace TaskList
 
         private void TextBlock_Tap_1(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            TextBlock text = (TextBlock)sender;
-            ColorAnimation animation = new ColorAnimation();
-            animation.From = Colors.White;
-            animation.To = Colors.Green;
+            TextBlock txt = (TextBlock)sender;
+
+            Task task = (Task)txt.DataContext;
+
+            App app = (App)Application.Current;
+
+            app.AuxParam = task;
+
+            NavigationService.Navigate(new Uri("/TaskView.xaml", UriKind.Relative));
         }
     }
       

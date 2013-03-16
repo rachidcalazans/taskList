@@ -27,23 +27,28 @@
         </Border>
 
         <Button Name="btAdd" Width="80" Grid.Row="0" HorizontalAlignment="Left" Click="btAdd_Click" BorderThickness="1" Foreground="#FF16962D" Background="#FF44D724">
-			<Image Source="/Icons/appbar.new.rest.png" Width="48" Height="48" Margin="-7,0,0,-2"></Image>
-		</Button>
+            <Image Source="/Icons/appbar.new.rest.png" Width="48" Height="48" Margin="-7,0,0,-2"></Image>
+        </Button>
         <TextBlock Grid.Row="0" FontSize="60" HorizontalAlignment="Center">  DoTask</TextBlock>
 
         <TextBlock Grid.Row="1" FontSize="40" HorizontalAlignment="Center" Foreground="White">Tasks</TextBlock>
 
-        <ListBox Name="lstResultado" Grid.Row="2" Foreground="#FF2A8515" Background="#FFF6F6F6">
+        <ListBox Name="lstResultado" Grid.Row="2" Foreground="#FFF" Background="#FFF6F6F6">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="365"/>
-                            <ColumnDefinition Width="110"/>
-                        </Grid.ColumnDefinitions>
-                        
-                        <TextBlock FontSize="25" Margin="10" Text="{Binding Description}" Grid.Row="0" Grid.Column="0" Tap="TextBlock_Tap_1" />
-                        <Button Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Click="Button_Click" Foreground="DarkGreen" BorderBrush="DarkGreen">View</Button>
+                        <Border>
+                            <Border.Background>
+                                <SolidColorBrush Color="#FF162D69"></SolidColorBrush>
+                            </Border.Background>
+                            <Border.BorderBrush>
+                                <SolidColorBrush Color="White"></SolidColorBrush>
+                            </Border.BorderBrush>
+                            <Border.BorderThickness>
+                                <Thickness>0 0 0 1</Thickness>
+                            </Border.BorderThickness>
+                        </Border>
+                        <TextBlock Width="480" FontSize="25" FontWeight="Bold" Margin="10" Text="{Binding Description}" Tap="TextBlock_Tap_1" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

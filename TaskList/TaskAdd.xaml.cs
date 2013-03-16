@@ -74,11 +74,7 @@ namespace TaskList
                 txtNameTitle.Text = txtNameInput.Text;
                 inputs.Children.Remove(txtNameInput);
                 inputs.Children.Remove(btSave);
-                
-                Button addSubTask = new Button();
-                inputs.Children.Add(addSubTask);
-                addSubTask.Content = "Add New Sub-Task";
-                addSubTask.Click += addSubTask_Click;
+                addSubTasks.Visibility = System.Windows.Visibility.Visible;
             }
             else
             {
@@ -129,6 +125,7 @@ namespace TaskList
                 task = (Task)app.AuxParam;
 
                 txtNameInput.Text = task.Description;
+                addSubTasks.Visibility = System.Windows.Visibility.Visible;
 
                 CarregarLista();
             }
@@ -198,6 +195,15 @@ namespace TaskList
         private void btLocation_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/TaskGps.xaml", UriKind.Relative));
+        }
+
+        private void TextBlock_Tap_1(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            TextBlock bt = (TextBlock)sender;
+
+            SubTask subTask = (SubTask)bt.DataContext;
+
+            NavigationService.Navigate(new Uri("/SubTaskAdd.xaml?idSubTask=" + subTask.Id, UriKind.Relative));
         }
     }
 }

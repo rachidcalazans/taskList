@@ -12,17 +12,21 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True">
-
-    <Grid>
-        <Grid.RowDefinitions>
+    <Grid Background="White">
+        <Grid.RowDefinitions>        
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <Border Grid.RowSpan="4">
+            <Border.Background>
+                <SolidColorBrush Color="#FF162D69"></SolidColorBrush>
+            </Border.Background>
+        </Border>
 
         <TextBlock Grid.Row="0" FontSize="40" HorizontalAlignment="Center">Add Sub-Task</TextBlock>
-        <Button Name="btSave" Click="btSave_Click" Width="100" Height="80" Grid.Row="2"  HorizontalAlignment="Right" >
+        <Button Name="btSave" Click="btSave_Click" Width="100" Height="80" Grid.Row="2"  HorizontalAlignment="Right" Background="#FF44D724" >
             <Image Width="48" Height="48" Source="/Icons/appbar.save.rest.png"></Image>
         </Button>
 
@@ -36,7 +40,6 @@
         <shell:ApplicationBar>
             <shell:ApplicationBarIconButton IconUri="/Icons/appbar.back.rest.png" Text="Back" Click="ApplicationBarIconButton_Click_1"></shell:ApplicationBarIconButton>
             <shell:ApplicationBarIconButton x:Name="btIcoDelete" IconUri="/Icons/appbar.delete.rest.png" Text="Delete" Click="btIcoDelete_Click"></shell:ApplicationBarIconButton>
-
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

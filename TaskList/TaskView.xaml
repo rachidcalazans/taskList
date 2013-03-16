@@ -12,15 +12,21 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True">
-<Grid>
+    <Grid Background="#FFFEFEFE">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>        
-        <TextBlock Grid.Row="1" FontSize="30" HorizontalAlignment="Center" Name="txtDescription"/>
-        <ListBox Name="lstResultado" Grid.Row="3">
+        </Grid.RowDefinitions>
+        <Border Grid.RowSpan="2">
+            <Border.Background>
+                <SolidColorBrush Color="#FF162D69"></SolidColorBrush>
+            </Border.Background>
+        </Border>
+        <TextBlock Grid.Row="1" FontSize="30" HorizontalAlignment="Center" Name="txtDescription" Foreground="White"/>
+        
+        <ListBox Name="lstResultado" Grid.Row="3" Foreground="#FF318216">
             <ListBox.ItemTemplate>
                 <DataTemplate x:Name="data">
                     <Grid>
@@ -29,9 +35,9 @@
                             <ColumnDefinition Width="110"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Margin="10" Grid.Row="0" Grid.Column="0"  Text="{Binding Description}"/>
+                        <TextBlock FontSize="30" FontWeight="Bold" Margin="10" Grid.Row="0" Grid.Column="0"  Text="{Binding Description}"/>
                         <Button Name="btDone" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Click="CheckBox_Click" Background="{Binding Color}" Content="Done"/>
-                        
+
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
