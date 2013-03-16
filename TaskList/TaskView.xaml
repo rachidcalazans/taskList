@@ -21,11 +21,10 @@
         </Grid.RowDefinitions>
 
         <Button Name="btBack" Width="100" Grid.Row="0" HorizontalAlignment="Left" Click="btBack_Click"> Back  </Button>
-        <TextBlock Grid.Row="0" FontSize="50"  HorizontalAlignment="Center"> View Task</TextBlock>
-        <TextBlock Grid.Row="1" FontSize="30" HorizontalAlignment="Left" Name="txtDescription"></TextBlock>
+        
+        <TextBlock Grid.Row="1" FontSize="30" HorizontalAlignment="Center" Name="txtDescription">asdfas</TextBlock>
         <Button Name="btEdit" Width="100"  Grid.Row="0"  HorizontalAlignment="Right" Click="btEdit_Click"> Edit</Button>
 
-        <TextBlock Grid.Row="2" FontSize="40"  HorizontalAlignment="Center"> Sub-Tasks</TextBlock>
 
         <ListBox Name="lstResultado" Grid.Row="3">
             <ListBox.ItemTemplate>

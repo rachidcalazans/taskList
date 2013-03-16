@@ -21,30 +21,36 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Button Name="btBack" Width="104" Grid.Row="0" HorizontalAlignment="Left" Click="btBack_Click">Back</Button>
         <TextBlock Grid.Row="0" FontSize="40" HorizontalAlignment="Center">Add Sub-Task</TextBlock>
-        <Button Name="btSave" Click="btSave_Click" Width="104" Grid.Row="1"  HorizontalAlignment="Right">Save</Button>
+        <Button Name="btSave" Click="btSave_Click" Width="100" Height="80" Grid.Row="2"  HorizontalAlignment="Right" >
+            <Image Width="48" Height="48" Source="/Icons/appbar.save.rest.png"></Image>
+        </Button>
 
-        <TextBox Name="txtDescription" Grid.Row="1" Grid.Column="0" Width="387" HorizontalAlignment="Left" Text="{Binding Description}"/>
+        <TextBox Name="txtDescription" Grid.Row="1" Grid.Column="0" Width="480" HorizontalAlignment="Left" Text="{Binding Description}"/>
 
-        <TextBlock Grid.Row="2" FontSize="30" Margin="12" HorizontalAlignment="Left">Alert Task</TextBlock>
-        <CheckBox Name="btCheck" Grid.Row="2" HorizontalAlignment="Center"/>
+        <CheckBox Name="btCheck" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left"/>
+        <TextBlock Grid.Row="2" FontSize="30" Margin="54 20 0 0" HorizontalAlignment="Left">Alert Task</TextBlock>
         <ListBox Name="lstResultado" Grid.Row="3">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Margin="10" Text="{Binding Description}" Grid.Row="0" Grid.Column="0"/>
                         <CheckBox Name="btCheckBox" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" IsChecked="{Binding Alert}" />
-                        <Button Name="btRemove" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" Click="btRemove_Click_1">Remove</Button>
+                        <TextBlock Margin="15" Text="{Binding Description}" Grid.Row="0" Grid.Column="0"/>
+                        <Button Name="btRemove" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" Click="btRemove_Click_1">X</Button>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
     </Grid>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar>
+            <shell:ApplicationBarIconButton IconUri="/Icons/appbar.back.rest.png" Text="Back" Click="ApplicationBarIconButton_Click_1"></shell:ApplicationBarIconButton>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

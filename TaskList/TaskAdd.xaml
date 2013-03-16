@@ -22,40 +22,35 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Button Name="btBack" Width="104" Grid.Row="0" HorizontalAlignment="Left" Click="btBack_Click">Back</Button>
         <TextBlock Grid.Row="0" Name="txtNameTitle" FontSize="40" HorizontalAlignment="Center" Text="Add Task"></TextBlock>
         
         <Grid Grid.Row="1" Name="inputs">
-            <TextBox Name="txtNameInput" Width="376" HorizontalAlignment="Left"/>
-            <Button Name="btSave" Width="104" HorizontalAlignment="Right" Click="btSave_Click_1">Save</Button>
+            <TextBox Grid.Row="0" Name="txtNameInput" Width="402" HorizontalAlignment="Left"/>
+            <Button Name="btSave" Width="95" Height="90" HorizontalAlignment="Right" Click="btSave_Click_1">
+                <Image Height="48" Width="48" Grid.Row="0" Source="/Icons/appbar.save.rest.png"></Image>
+            </Button>
         </Grid>
-
         <ListBox Name="lstResultado" Grid.Row="3">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-
+ 
                         <TextBlock Margin="10" Text="{Binding Description}" Grid.Row="0" Grid.Column="0"/>
-
                         <Button Name="btEdit" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right">Edit</Button>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-
-        <Button Name="btPickLocation" Grid.Row="4" HorizontalAlignment="Left">Pick Location</Button>
-
-        <Button Name="btDelete" 
-                Grid.Row="4"
-                HorizontalAlignment="Right" Click="btDelete_Click">
-            Delete Task
-        </Button>
-
     </Grid>
-
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar>
+            <shell:ApplicationBarIconButton IconUri="/Icons/appbar.back.rest.png" Text="Back" Click="ApplicationBarIconButton_Click_1"></shell:ApplicationBarIconButton>
+            <shell:ApplicationBarIconButton IconUri="/Icons/appbar.delete.rest.png" Text="Delete" Click="ApplicationBarIconButton_Click_2"></shell:ApplicationBarIconButton>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 
 </phone:PhoneApplicationPage>

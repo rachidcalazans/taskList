@@ -45,27 +45,24 @@ namespace TaskList
 
         private void btSave_Click(object sender, RoutedEventArgs e)
         {
-            using (MyLocalDatabase banco = new MyLocalDatabase(MyLocalDatabase.ConnectionString))
+            if (txtDescription.Text != "")
             {
-                    int boolChecked = (Convert.ToBoolean(btCheck.IsChecked))? 1 : 0;
+                using (MyLocalDatabase banco = new MyLocalDatabase(MyLocalDatabase.ConnectionString))
+                {
+                    int boolChecked = (Convert.ToBoolean(btCheck.IsChecked)) ? 1 : 0;
                     SubTask subTask = new SubTask()
                     {
                         Description = txtDescription.Text,
-                        Status      = 0,
-                        Alert       = boolChecked,
-                        TaskId      = task.Id
+                        Status = 0,
+                        Alert = boolChecked,
+                        TaskId = task.Id
                     };
                     banco.SubTasks.InsertOnSubmit(subTask);
                     banco.SubmitChanges();
-            }
-            CarregarLista();
-        }
-
-        private void btBack_Click(object sender, RoutedEventArgs e)
-        {
-            if (NavigationService.CanGoBack)
-            {
-                NavigationService.GoBack();
+                }
+                txtDescription.Text = "";
+                btCheck.IsChecked = false;
+                CarregarLista();
             }
         }
 
@@ -82,6 +79,14 @@ namespace TaskList
                     banco.SubmitChanges();
                 }
                 CarregarLista();
+            }
+        }
+
+        private void ApplicationBarIconButton_Click_1(object sender, EventArgs e)
+        {
+            if (NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
             }
         }
     }

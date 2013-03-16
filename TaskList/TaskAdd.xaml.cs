@@ -57,12 +57,20 @@ namespace TaskList
             NavigationService.Navigate(new Uri("/SubTaskAdd.xaml", UriKind.Relative));
         }
 
-        private void btBack_Click(object sender, RoutedEventArgs e)
+
+        public void CarregarLista()
         {
-            if (NavigationService.CanGoBack)
+            using (MyLocalDatabase banco = new MyLocalDatabase(MyLocalDatabase.ConnectionString))
             {
-                NavigationService.GoBack();
+                List<SubTask> subTasks = (from subtask in banco.SubTasks where subtask.Task == task select subtask).ToList();
+                lstResultado.ItemsSource = subTasks;
             }
+        }
+
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            CarregarLista();
         }
 
         private void btDelete_Click(object sender, RoutedEventArgs e)
@@ -77,6 +85,33 @@ namespace TaskList
                     NavigationService.GoBack();
                 }
             }
+        }
+
+        private void ApplicationBarIconButton_Click_1(object sender, EventArgs e)
+        {
+            if (NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }
+        }
+
+        private void ApplicationBarIconButton_Click_2(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Deseja realmente remover?", "Confirmar", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            {
+                using (MyLocalDatabase banco = new MyLocalDatabase(MyLocalDatabase.ConnectionString))
+                {
+                    banco.Tasks.Attach(task);
+                    banco.Tasks.DeleteOnSubmit(task);
+                    banco.SubmitChanges();
+                    NavigationService.GoBack();
+                }
+            }
+        }
+
+        private void ApplicationBarIconButton_Click_3(object sender, EventArgs e)
+        {
+
         }
     }
 }
