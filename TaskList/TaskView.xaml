@@ -20,16 +20,16 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Button Name="btBack" Width="100" Grid.Row="0" HorizontalAlignment="Left"> Back  </Button>
+        <Button Name="btBack" Width="100" Grid.Row="0" HorizontalAlignment="Left" Click="btBack_Click"> Back  </Button>
         <TextBlock Grid.Row="0" FontSize="50"  HorizontalAlignment="Center"> View Task</TextBlock>
         <TextBlock Grid.Row="1" FontSize="30" HorizontalAlignment="Left" Name="txtDescription"></TextBlock>
-        <Button Name="btEdit" Width="100"  Grid.Row="0"  HorizontalAlignment="Right"> Edit</Button>
+        <Button Name="btEdit" Width="100"  Grid.Row="0"  HorizontalAlignment="Right" Click="btEdit_Click"> Edit</Button>
 
         <TextBlock Grid.Row="2" FontSize="40"  HorizontalAlignment="Center"> Sub-Tasks</TextBlock>
 
         <ListBox Name="lstResultado" Grid.Row="3">
             <ListBox.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate x:Name="data">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -37,7 +37,7 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Margin="10" Grid.Row="0" Grid.Column="0"  Text="{Binding Description}"/>
-                        <Button Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right"> Done/UnDone</Button>
+                        <Button Name="btDone" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Click="CheckBox_Click" Background="{Binding Color}" Content="Done"/>
                         
                     </Grid>
                 </DataTemplate>

@@ -33,9 +33,57 @@ namespace TaskList
                 using (MyLocalDatabase banco = new MyLocalDatabase(MyLocalDatabase.ConnectionString))
                 {
                     List<SubTask> subTasks = (from subtask in banco.SubTasks where subtask.TaskId == task.Id select subtask).ToList();
+                  
                     lstResultado.ItemsSource = subTasks;
+                    
                 }
             }
+        }
+
+        private void CheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            Button bt = (Button)sender;
+
+            SubTask subTask = (SubTask)bt.DataContext;
+
+            if (subTask.Status == 0)
+            {
+                subTask.Status = 1;
+                bt.Background = new SolidColorBrush(Colors.Black);
+            }
+            else
+            {
+                subTask.Status = 0;
+                bt.Background = new SolidColorBrush(Colors.Green);
+            }
+
+            using (MyLocalDatabase banco = new MyLocalDatabase(MyLocalDatabase.ConnectionString))
+            {
+                SubTask s = banco.SubTasks.Where(o => o.Id.Equals(subTask.Id)).First();
+                s.Status = subTask.Status;
+
+                banco.SubmitChanges();
+            }
+        }
+
+        private void btBack_Click(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }
+        }
+
+        private void btEdit_Click(object sender, RoutedEventArgs e)
+        {
+            Button bt = (Button)sender;
+
+            SubTask subTask = (SubTask)bt.DataContext;
+
+            App app = (App)Application.Current;
+            app.AuxParam = subTask;
+
+            NavigationService.Navigate(new Uri("/TaskAdd.xaml", UriKind.Relative));
         }
     }
 }

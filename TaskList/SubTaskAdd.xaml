@@ -24,14 +24,14 @@
 
         <Button Name="btBack" Width="104" Grid.Row="0" HorizontalAlignment="Left">Back</Button>
         <TextBlock Grid.Row="0" FontSize="40" HorizontalAlignment="Center">Add Sub-Task</TextBlock>
-        <Button Name="btSave" Width="104" Grid.Row="0"  HorizontalAlignment="Right">Save</Button>
+        <Button Name="btSave" Click="btSave_Click" Width="104" Grid.Row="0"  HorizontalAlignment="Right">Save</Button>
 
         <TextBlock Grid.Row="1" Grid.Column="0" FontSize="35" HorizontalAlignment="Left">Description Sub-task</TextBlock>
 
-        <TextBox Name="txtBusca" Grid.Row="2" Grid.Column="0" Width="350" HorizontalAlignment="Left"/>
+        <TextBox Name="txtDescription" Grid.Row="2" Grid.Column="0" Width="350" HorizontalAlignment="Left" Text="{Binding Description}"/>
 
         <TextBlock Grid.Row="3" FontSize="30" Margin="12" HorizontalAlignment="Left">Alert Task</TextBlock>
-        <CheckBox Name="btPickLocation" Grid.Row="3" HorizontalAlignment="Center"/>
+        <CheckBox Name="btCheck" Grid.Row="3" HorizontalAlignment="Center"/>
 
         <Button Name="btDelete" 
                 Grid.Row="4"
