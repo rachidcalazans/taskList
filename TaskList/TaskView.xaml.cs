@@ -16,6 +16,7 @@ namespace TaskList
 {
     public partial class TaskView : PhoneApplicationPage
     {
+        Task task;
         public TaskView()
         {
             InitializeComponent();
@@ -28,7 +29,7 @@ namespace TaskList
             App app = Application.Current as App;
             if (app.AuxParam != null && app.AuxParam.GetType() == typeof(Task))
             {
-                Task task = (Task)app.AuxParam;
+                task = (Task)app.AuxParam;
                 txtDescription.Text = task.Description;
                 using (MyLocalDatabase banco = new MyLocalDatabase(MyLocalDatabase.ConnectionString))
                 {
@@ -78,7 +79,6 @@ namespace TaskList
                 banco.SubmitChanges();
             }
 
-            MessageBox.Show("status 2 -> " + s.Status);
             if (s.Status == 0)
             {
                 bt.Background = new SolidColorBrush(Colors.Black);
@@ -90,7 +90,7 @@ namespace TaskList
 
         }
 
-        private void btBack_Click(object sender, RoutedEventArgs e)
+        private void ApplicationBarIconButton_Click_1(object sender, EventArgs e)
         {
             if (NavigationService.CanGoBack)
             {
@@ -98,14 +98,38 @@ namespace TaskList
             }
         }
 
-        private void btEdit_Click(object sender, RoutedEventArgs e)
+        private void ApplicationBarIconButton_Click_2(object sender, EventArgs e)
         {
-            Button bt = (Button)sender;
-
             App app = (App)Application.Current;
-            Task task = (Task)app.AuxParam;
+
+            app.AuxParam = task;
 
             NavigationService.Navigate(new Uri("/TaskAdd.xaml", UriKind.Relative));
+        }
+
+        private void ApplicationBarIconButton_Click_3(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Deseja realmente remover?", "Confirmar", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            {
+                using (MyLocalDatabase banco = new MyLocalDatabase(MyLocalDatabase.ConnectionString))
+                {
+                    task = banco.Tasks.Where(o => o.Id.Equals(task.Id)).First();
+                    List<SubTask> subTasks = (from subtask in banco.SubTasks where subtask.TaskId == task.Id select subtask).ToList();
+
+                    if (subTasks.Count > 0)
+                    {
+                        foreach (var subTask in subTasks)
+                        {
+                            banco.SubTasks.DeleteOnSubmit(subTask);
+                        }
+                    }
+
+                    banco.Tasks.DeleteOnSubmit(task);
+                    banco.SubmitChanges();
+
+                    NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+                }
+            }
         }
     }
 }

@@ -18,21 +18,15 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <Button Name="btBack" Width="100" Grid.Row="0" HorizontalAlignment="Left" Click="btBack_Click"> Back  </Button>
-        
+        </Grid.RowDefinitions>        
         <TextBlock Grid.Row="1" FontSize="30" HorizontalAlignment="Center" Name="txtDescription"/>
-        <Button Name="btEdit" Width="100"  Grid.Row="0"  HorizontalAlignment="Right" Click="btEdit_Click"> Edit</Button>
-
-
         <ListBox Name="lstResultado" Grid.Row="3">
             <ListBox.ItemTemplate>
                 <DataTemplate x:Name="data">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="365"/>
+                            <ColumnDefinition Width="110"/>
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Margin="10" Grid.Row="0" Grid.Column="0"  Text="{Binding Description}"/>
@@ -44,4 +38,11 @@
         </ListBox>
 
     </Grid>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar>
+            <shell:ApplicationBarIconButton IconUri="/Icons/appbar.back.rest.png" Text="Back" Click="ApplicationBarIconButton_Click_1"></shell:ApplicationBarIconButton>
+            <shell:ApplicationBarIconButton IconUri="/Icons/appbar.edit.rest.png" Text="Edit" Click="ApplicationBarIconButton_Click_2"></shell:ApplicationBarIconButton>
+            <shell:ApplicationBarIconButton IconUri="/Icons/appbar.delete.rest.png" Text="Remove" Click="ApplicationBarIconButton_Click_3"></shell:ApplicationBarIconButton>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

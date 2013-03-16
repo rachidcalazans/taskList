@@ -6,6 +6,8 @@ using TaskList.DatabaseAccess;
 using System.Globalization;
 using System;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
+using System.Windows.Media;
 
 namespace TaskList
 {
@@ -60,6 +62,14 @@ namespace TaskList
 
             NavigationService.Navigate(new Uri("/TaskAdd.xaml", UriKind.Relative));
 
+        }
+
+        private void TextBlock_Tap_1(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            TextBlock text = (TextBlock)sender;
+            ColorAnimation animation = new ColorAnimation();
+            animation.From = Colors.White;
+            animation.To = Colors.Green;
         }
     }
       
