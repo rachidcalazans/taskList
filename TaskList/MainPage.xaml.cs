@@ -53,8 +53,11 @@ namespace TaskList
             NavigationService.Navigate(new Uri("/TaskView.xaml", UriKind.Relative));
         }
 
-        private void btSalvar_Click_1(object sender, RoutedEventArgs e)
+        private void btAdd_Click(object sender, RoutedEventArgs e)
         {
+            App app = (App)Application.Current;
+            app.AuxParam = null;
+
             NavigationService.Navigate(new Uri("/TaskAdd.xaml", UriKind.Relative));
 
         }

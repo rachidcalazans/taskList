@@ -78,10 +78,8 @@ namespace TaskList
         {
             Button bt = (Button)sender;
 
-            SubTask subTask = (SubTask)bt.DataContext;
-
             App app = (App)Application.Current;
-            app.AuxParam = subTask;
+            Task task = (Task)app.AuxParam;
 
             NavigationService.Navigate(new Uri("/TaskAdd.xaml", UriKind.Relative));
         }

@@ -10,7 +10,7 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True">
 
     <Grid>
@@ -30,27 +30,13 @@
 
         <CheckBox Name="btCheck" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left"/>
         <TextBlock Grid.Row="2" FontSize="30" Margin="54 20 0 0" HorizontalAlignment="Left">Alert Task</TextBlock>
-        <ListBox Name="lstResultado" Grid.Row="3">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-
-                        <CheckBox Name="btCheckBox" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" IsChecked="{Binding Alert}" />
-                        <TextBlock Margin="15" Text="{Binding Description}" Grid.Row="0" Grid.Column="0"/>
-                        <Button Name="btRemove" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" Click="btRemove_Click_1">X</Button>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar>
             <shell:ApplicationBarIconButton IconUri="/Icons/appbar.back.rest.png" Text="Back" Click="ApplicationBarIconButton_Click_1"></shell:ApplicationBarIconButton>
+            <shell:ApplicationBarIconButton x:Name="btIcoDelete" IconUri="/Icons/appbar.delete.rest.png" Text="Delete" Click="btIcoDelete_Click"></shell:ApplicationBarIconButton>
+
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

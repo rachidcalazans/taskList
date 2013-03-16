@@ -21,7 +21,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Button Name="btAdd" Width="100" Grid.Row="0" HorizontalAlignment="Left" Click="btSalvar_Click_1"> Add </Button>
+        <Button Name="btAdd" Width="100" Grid.Row="0" HorizontalAlignment="Left" Click="btAdd_Click"> Add </Button>
         <TextBlock Grid.Row="0" FontSize="60" HorizontalAlignment="Center">  DoTask </TextBlock>
 
         <TextBlock Grid.Row="1" FontSize="40" HorizontalAlignment="Center">Tasks </TextBlock>
