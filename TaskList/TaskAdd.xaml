@@ -20,6 +20,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Border>
             <Border.Background>
@@ -60,7 +62,11 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button Name="btLocation" Content="Pick Location" Grid.Row="4" Click="btLocation_Click" Background="#FF006C66"/>
+
+        <TextBlock Name="txtLat" Grid.Row="4" FontSize="30" Margin="12" HorizontalAlignment="Left" Foreground="Black">Lat.:</TextBlock>
+        <TextBlock Name="txtLong" Grid.Row="5" FontSize="30" Margin="12" HorizontalAlignment="Left" Foreground="Black">Long.:</TextBlock>
+
+        <Button Name="btLocation" Content="Pick Location" Grid.Row="6" Click="btLocation_Click" Background="#FF006C66"/>
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar>

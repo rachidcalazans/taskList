@@ -20,29 +20,18 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Button Name="btBack" Width="104" Grid.Row="0" HorizontalAlignment="Left" Click="btBack_Click">Back</Button>
         <TextBlock Grid.Row="0" FontSize="40" HorizontalAlignment="Center">Add Locatoin</TextBlock>
-        <Button Name="btSave" Width="104" Grid.Row="0"  HorizontalAlignment="Right">Save</Button>
+       
+        <TextBlock Grid.Row="1" Grid.Column="0" FontSize="35" HorizontalAlignment="Center">Pick on Map</TextBlock>
 
-        <TextBlock Grid.Row="1" Grid.Column="0" FontSize="35" HorizontalAlignment="Center">Search or Pick on Map</TextBlock>
+        <TextBlock Name="txtLat" Grid.Row="2" FontSize="30" Margin="12" HorizontalAlignment="Left">Lat.:</TextBlock>
+        <TextBlock Name="txtLong" Grid.Row="3" FontSize="30" Margin="12" HorizontalAlignment="Left">Long.:</TextBlock>
 
-
-        <TextBlock Grid.Row="2" Grid.Column="0" FontSize="35" HorizontalAlignment="Left">Address</TextBlock>
-
-        <TextBox Name="txtBusca" Grid.Row="3" Grid.Column="0" Width="350" HorizontalAlignment="Left"/>
-
-        <Button Name="btSearch"  Grid.Row="4"  HorizontalAlignment="Left"> Search</Button>
-
-        <TextBlock Name="txtLat" Grid.Row="5" FontSize="30" Margin="12" HorizontalAlignment="Left">Lat.:</TextBlock>
-        <TextBlock Name="txtLong" Grid.Row="6" FontSize="30" Margin="12" HorizontalAlignment="Left">Long.:</TextBlock>
-
-        <my:Map Grid.Row="7" Name="mapa"/>
+        <my:Map Grid.Row="4" Name="mapa"/>
 
     </Grid>
 

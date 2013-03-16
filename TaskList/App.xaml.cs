@@ -58,15 +58,6 @@ namespace TaskList
                 // and consume battery power when the user is not using the phone.
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
-
-            StandardTileData data = new StandardTileData()
-            {
-                Title = "TaskList",
-                BackgroundImage = new Uri("background.png", UriKind.Relative)
-            };
-
-            ShellTile.Create(new Uri("/MainPage.xaml", UriKind.Relative), data);
-
         }
 
         // Code to execute when the application is launching (eg, from Start)

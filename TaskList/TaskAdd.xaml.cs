@@ -29,19 +29,7 @@ namespace TaskList
             base.OnNavigatedFrom(e);
             if (e.NavigationMode != System.Windows.Navigation.NavigationMode.Back)
             {
-                if (task == null)
-                {
-                    task = new Task()
-                    {
-                        Description = txtNameInput.Text,
-                        Status = 0
-                    };
-                    //task.Description = txtNameInput.Text;
-                }
-                //MessageBox.Show("Des. 2: " + task.Description);
-                State["task"] = task;
-
-                //State["task"] = txtNameInput.Text;
+                State["taskName"] = txtNameInput.Text;
             }
         }
 
@@ -104,19 +92,11 @@ namespace TaskList
         {
             base.OnNavigatedTo(e);
 
-            if (isNewPageInstance)
+            if (State.ContainsKey("taskName"))
             {
-                if (State.ContainsKey("task"))
-                {
-                    task = (Task)State["task"];
-                    MessageBox.Show("id = " + task.Description);
-                    //string a = State["task"].ToString();
-                    //MessageBox.Show("id = " + a);
-                }
-                DataContext = task;
+                txtNameInput.Text = State["taskName"].ToString();
+                   
             }
-
-            isNewPageInstance = false;
 
             App app = Application.Current as App;
 
@@ -125,6 +105,18 @@ namespace TaskList
                 task = (Task)app.AuxParam;
 
                 txtNameInput.Text = task.Description;
+
+                using (MyLocalDatabase banco = new MyLocalDatabase(MyLocalDatabase.ConnectionString))
+                {
+                    GpsPoint gps = banco.GpsPoints.Where(o => o.TaskId.Equals(task.Id)).First();
+
+                    if (gps != null)
+                    {
+                        txtLat.Text = gps.Latitude;
+                        txtLong.Text = gps.Longitude;
+                    }
+                }
+
                 addSubTasks.Visibility = System.Windows.Visibility.Visible;
 
                 CarregarLista();
@@ -194,6 +186,9 @@ namespace TaskList
 
         private void btLocation_Click(object sender, RoutedEventArgs e)
         {
+            App app = (App)Application.Current;
+            app.AuxParam = task;
+
             NavigationService.Navigate(new Uri("/TaskGps.xaml", UriKind.Relative));
         }
 

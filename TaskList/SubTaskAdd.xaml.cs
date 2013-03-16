@@ -24,9 +24,24 @@ namespace TaskList
             InitializeComponent();
         }
 
+        protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            if (e.NavigationMode != System.Windows.Navigation.NavigationMode.Back)
+            {
+                State["subTaskName"] = txtDescription.Text;
+            }
+        }
+
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+
+            if (State.ContainsKey("subTaskName"))
+            {
+                txtDescription.Text = State["subTaskName"].ToString();
+
+            }
 
             string idSubTask = NavigationContext.QueryString["idSubTask"];
             
