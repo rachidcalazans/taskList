@@ -19,16 +19,6 @@ namespace TaskList
         public TaskView()
         {
             InitializeComponent();
-            CarregarSubTask();
-        }
-
-        public void CarregarSubTask()
-        {
-            using (MyLocalDatabase banco = new MyLocalDatabase(MyLocalDatabase.ConnectionString))
-            {
-                List<SubTask> subtasks = (from subtask in banco.SubTasks select subtask).ToList();
-                lstResultado.ItemsSource = subtasks;
-            }
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
@@ -39,8 +29,13 @@ namespace TaskList
             if (app.AuxParam != null && app.AuxParam.GetType() == typeof(Task))
             {
                 Task task = (Task)app.AuxParam;
-                
-                lstResultado.ItemsSource = task.SubTasks;
+                txtDescription.Text = task.Description;
+                using (MyLocalDatabase banco = new MyLocalDatabase(MyLocalDatabase.ConnectionString))
+                {
+                    List<SubTask> subTasks = (from subtask in banco.SubTasks where subtask.TaskId == task.Id select subtask).ToList();
+                    lstResultado.ItemsSource = subTasks;
+                }
+                //lstResultado.ItemsSource = task.SubTasks;
             }
         }
     }

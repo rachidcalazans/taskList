@@ -37,6 +37,7 @@ namespace TaskList
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Button bt = (Button)sender;
+           
             Task task = (Task)bt.DataContext; 
 
             App app = (App)Application.Current;
@@ -67,7 +68,7 @@ namespace TaskList
 
                 SubTask subtask = new SubTask()
                 {
-                    Description = "Super subtask",
+                    Description = "Super tasdasfasdasdasdasfa asfdasdasfasdqweqwr",
                     Status = 0,
                     Task = task
                 };
