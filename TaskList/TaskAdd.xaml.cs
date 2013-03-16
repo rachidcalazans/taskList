@@ -17,11 +17,9 @@ namespace TaskList
     public partial class TaskAdd : PhoneApplicationPage
     {
         Task task;
-        bool isNewPageInstance = false;
         public TaskAdd()
         {
             InitializeComponent();
-            isNewPageInstance = true;
         }
 
         protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
@@ -83,6 +81,14 @@ namespace TaskList
         {
             using (MyLocalDatabase banco = new MyLocalDatabase(MyLocalDatabase.ConnectionString))
             {
+                List<GpsPoint> gpsList = (from gpspoint in banco.GpsPoints where gpspoint.TaskId == task.Id select gpspoint).ToList();
+
+                if (gpsList.Count > 0)
+                {
+                    txtLat.Text = "Lat.: " + gpsList[0].Latitude;
+                    txtLong.Text = "Long.: " + gpsList[0].Longitude;
+                }
+
                 List<SubTask> subTasks = (from subtask in banco.SubTasks where subtask.TaskId == task.Id select subtask).ToList();
 
                 lstResultado.ItemsSource = subTasks;
@@ -105,17 +111,6 @@ namespace TaskList
                 task = (Task)app.AuxParam;
 
                 txtNameInput.Text = task.Description;
-
-                using (MyLocalDatabase banco = new MyLocalDatabase(MyLocalDatabase.ConnectionString))
-                {
-                    GpsPoint gps = banco.GpsPoints.Where(o => o.TaskId.Equals(task.Id)).First();
-
-                    if (gps.Latitude != null)
-                    {
-                        txtLat.Text = "Lat.: "+gps.Latitude;
-                        txtLong.Text = "Long.: "+gps.Longitude;
-                    }
-                }
 
                 addSubTasks.Visibility = System.Windows.Visibility.Visible;
 
@@ -153,12 +148,21 @@ namespace TaskList
                 {
                     task = banco.Tasks.Where(o => o.Id.Equals(task.Id)).First();
                     List<SubTask> subTasks = (from subtask in banco.SubTasks where subtask.TaskId == task.Id select subtask).ToList();
+                    List<GpsPoint> gpsList = (from gpspoint in banco.GpsPoints where gpspoint.TaskId == task.Id select gpspoint).ToList();
 
                     if (subTasks.Count > 0) 
                     {
                         foreach (var subTask in subTasks)
                         {
                             banco.SubTasks.DeleteOnSubmit(subTask);
+                        }
+                    }
+
+                    if (gpsList.Count > 0)
+                    {
+                        foreach (var gps in gpsList)
+                        {
+                            banco.GpsPoints.DeleteOnSubmit(gps);
                         }
                     }
 

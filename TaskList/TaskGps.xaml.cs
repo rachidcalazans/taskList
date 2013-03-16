@@ -101,13 +101,12 @@ namespace TaskList
                 task = (Task)app.AuxParam;
                 using (MyLocalDatabase banco = new MyLocalDatabase(MyLocalDatabase.ConnectionString))
                 {
-                    GpsPoint gps = banco.GpsPoints.Where(o => o.TaskId.Equals(task.Id)).First();
+                    List<GpsPoint> gpsList = (from gpspoint in banco.GpsPoints where gpspoint.TaskId == task.Id select gpspoint).ToList();
 
-                    if (gps.Latitude != null)
-                    { 
-                        gpsPoint = gps;
-                        txtLat.Text = "Lat.: " + gps.Latitude;
-                        txtLong.Text = "Long.: " + gps.Longitude;
+                    if (gpsList.Count > 0)
+                    {
+                        txtLat.Text = "Lat.: " + gpsList[0].Latitude;
+                        txtLong.Text = "Long.: " + gpsList[0].Longitude;
                     }
                 }
             }
