@@ -26,7 +26,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Button Name="btBack" Width="104" Grid.Row="0" HorizontalAlignment="Left">Back</Button>
+        <Button Name="btBack" Width="104" Grid.Row="0" HorizontalAlignment="Left" Click="btBack_Click">Back</Button>
         <TextBlock Grid.Row="0" FontSize="40" HorizontalAlignment="Center">Add Locatoin</TextBlock>
         <Button Name="btSave" Width="104" Grid.Row="0"  HorizontalAlignment="Right">Save</Button>
 
@@ -39,8 +39,8 @@
 
         <Button Name="btSearch"  Grid.Row="4"  HorizontalAlignment="Left"> Search</Button>
 
-        <TextBlock Grid.Row="5" FontSize="30" Margin="12" HorizontalAlignment="Left">Lat.:</TextBlock>
-        <TextBlock Grid.Row="6" FontSize="30" Margin="12" HorizontalAlignment="Left">Long.:</TextBlock>
+        <TextBlock Name="txtLat" Grid.Row="5" FontSize="30" Margin="12" HorizontalAlignment="Left">Lat.:</TextBlock>
+        <TextBlock Name="txtLong" Grid.Row="6" FontSize="30" Margin="12" HorizontalAlignment="Left">Long.:</TextBlock>
 
         <my:Map Grid.Row="7" Name="mapa"/>
 

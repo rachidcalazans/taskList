@@ -157,5 +157,10 @@ namespace TaskList
 
             NavigationService.Navigate(new Uri("/SubTaskAdd.xaml?idSubTask="+subTask.Id, UriKind.Relative));
         }
+
+        private void btLocation_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/TaskGps.xaml", UriKind.Relative));
+        }
     }
 }
