@@ -33,7 +33,19 @@ namespace TaskList
                 using (MyLocalDatabase banco = new MyLocalDatabase(MyLocalDatabase.ConnectionString))
                 {
                     List<SubTask> subTasks = (from subtask in banco.SubTasks where subtask.TaskId == task.Id select subtask).ToList();
-                  
+
+                    foreach (var subTask in subTasks)
+                    {
+                        if (subTask.Status == 0)
+                        {
+                            subTask.Color = new SolidColorBrush(Colors.Black);
+                        }
+                        else
+                        {
+                            subTask.Color = new SolidColorBrush(Colors.Green);
+                        }
+                    }
+
                     lstResultado.ItemsSource = subTasks;
                     
                 }
@@ -57,13 +69,25 @@ namespace TaskList
                 bt.Background = new SolidColorBrush(Colors.Green);
             }
 
+            SubTask s;
             using (MyLocalDatabase banco = new MyLocalDatabase(MyLocalDatabase.ConnectionString))
             {
-                SubTask s = banco.SubTasks.Where(o => o.Id.Equals(subTask.Id)).First();
+                s = banco.SubTasks.Where(o => o.Id.Equals(subTask.Id)).First();
                 s.Status = subTask.Status;
 
                 banco.SubmitChanges();
             }
+
+            MessageBox.Show("status 2 -> " + s.Status);
+            if (s.Status == 0)
+            {
+                bt.Background = new SolidColorBrush(Colors.Black);
+            }
+            else
+            {
+                bt.Background = new SolidColorBrush(Colors.Green);
+            }
+
         }
 
         private void btBack_Click(object sender, RoutedEventArgs e)

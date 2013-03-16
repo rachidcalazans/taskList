@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
+using System.Windows.Media;
 
 namespace TaskList.DatabaseAccess
 {
@@ -21,6 +22,8 @@ namespace TaskList.DatabaseAccess
 
         [Column()]
         public int TaskId { get; set; }
+
+        public SolidColorBrush Color { get; set; }
 
         private EntityRef<Task> taskRef;
 
