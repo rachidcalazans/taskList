@@ -19,25 +19,32 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Button Name="btBack" Width="104" Grid.Row="0" HorizontalAlignment="Left">Back</Button>
+        <Button Name="btBack" Width="104" Grid.Row="0" HorizontalAlignment="Left" Click="btBack_Click">Back</Button>
         <TextBlock Grid.Row="0" FontSize="40" HorizontalAlignment="Center">Add Sub-Task</TextBlock>
-        <Button Name="btSave" Click="btSave_Click" Width="104" Grid.Row="0"  HorizontalAlignment="Right">Save</Button>
+        <Button Name="btSave" Click="btSave_Click" Width="104" Grid.Row="1"  HorizontalAlignment="Right">Save</Button>
 
-        <TextBlock Grid.Row="1" Grid.Column="0" FontSize="35" HorizontalAlignment="Left">Description Sub-task</TextBlock>
+        <TextBox Name="txtDescription" Grid.Row="1" Grid.Column="0" Width="387" HorizontalAlignment="Left" Text="{Binding Description}"/>
 
-        <TextBox Name="txtDescription" Grid.Row="2" Grid.Column="0" Width="350" HorizontalAlignment="Left" Text="{Binding Description}"/>
+        <TextBlock Grid.Row="2" FontSize="30" Margin="12" HorizontalAlignment="Left">Alert Task</TextBlock>
+        <CheckBox Name="btCheck" Grid.Row="2" HorizontalAlignment="Center"/>
+        <ListBox Name="lstResultado" Grid.Row="3">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="3" FontSize="30" Margin="12" HorizontalAlignment="Left">Alert Task</TextBlock>
-        <CheckBox Name="btCheck" Grid.Row="3" HorizontalAlignment="Center"/>
-
-        <Button Name="btDelete" 
-                Grid.Row="4"
-                HorizontalAlignment="Center">
-            Delete Sub-Task
-        </Button>
-
+                        <TextBlock Margin="10" Text="{Binding Description}" Grid.Row="0" Grid.Column="0"/>
+                        <CheckBox Name="btCheckBox" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" IsChecked="{Binding Alert}" />
+                        <Button Name="btRemove" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" Click="btRemove_Click_1">Remove</Button>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </phone:PhoneApplicationPage>

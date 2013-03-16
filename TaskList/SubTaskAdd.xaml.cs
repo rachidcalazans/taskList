@@ -16,9 +16,19 @@ namespace TaskList
 {
     public partial class SubTaskAdd : PhoneApplicationPage
     {
+        Task task;
         public SubTaskAdd()
         {
             InitializeComponent();
+        }
+
+        public void CarregarLista()
+        {
+            using (MyLocalDatabase banco = new MyLocalDatabase(MyLocalDatabase.ConnectionString))
+            {
+                List<SubTask> subTasks = (from subtask in banco.SubTasks where subtask.Task == task select subtask).ToList();
+                lstResultado.ItemsSource = subTasks;
+            }
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
@@ -28,25 +38,51 @@ namespace TaskList
             App app = Application.Current as App;
             if (app.AuxParam != null && app.AuxParam.GetType() == typeof(Task))
             {
-                SubTask subTask = (SubTask)app.AuxParam;
-                txtDescription.Text = subTask.Description;
-                if (subTask.Status == 1) {
-                    btCheck.IsChecked = true;
-                }
-                
+                task = (Task)app.AuxParam;
+                CarregarLista();
             }
         }
 
         private void btSave_Click(object sender, RoutedEventArgs e)
         {
-            SubTask subTask = new SubTask() 
-            { 
-                Description = txtDescription.Text,
-
-            };
-
+            using (MyLocalDatabase banco = new MyLocalDatabase(MyLocalDatabase.ConnectionString))
+            {
+                    int boolChecked = (Convert.ToBoolean(btCheck.IsChecked))? 1 : 0;
+                    SubTask subTask = new SubTask()
+                    {
+                        Description = txtDescription.Text,
+                        Status      = 0,
+                        Alert       = boolChecked,
+                        TaskId      = task.Id
+                    };
+                    banco.SubTasks.InsertOnSubmit(subTask);
+                    banco.SubmitChanges();
+            }
+            CarregarLista();
         }
 
+        private void btBack_Click(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }
+        }
 
+        private void btRemove_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Deseja realmente remover?", "Confirmar", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            {
+                using (MyLocalDatabase banco = new MyLocalDatabase(MyLocalDatabase.ConnectionString))
+                {
+                    Button bt = (Button)sender;
+                    SubTask subtask = (SubTask) bt.DataContext;
+                    banco.SubTasks.Attach(subtask);
+                    banco.SubTasks.DeleteOnSubmit(subtask);
+                    banco.SubmitChanges();
+                }
+                CarregarLista();
+            }
+        }
     }
 }

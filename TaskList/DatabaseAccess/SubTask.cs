@@ -14,6 +14,9 @@ namespace TaskList.DatabaseAccess
         public String Description { get; set; }
 
         [Column()]
+        public int Alert { get; set; }
+
+        [Column()]
         public int Status { get; set; }
 
         [Column()]
