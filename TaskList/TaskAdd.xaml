@@ -13,11 +13,8 @@
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True">
 
-    <Grid>
+    <Grid Name="gridPrincipal">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -25,21 +22,15 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Button Name="btBack" Width="104" Grid.Row="0" HorizontalAlignment="Left">Back</Button>
-        <TextBlock Grid.Row="0" FontSize="50" HorizontalAlignment="Center">Add Task</TextBlock>
-        <Button Name="btSave" Width="104" Grid.Row="0"  HorizontalAlignment="Right">Save</Button>
+        <Button Name="btBack" Width="104" Grid.Row="0" HorizontalAlignment="Left" Click="btBack_Click">Back</Button>
+        <TextBlock Grid.Row="0" Name="txtNameTitle" FontSize="40" HorizontalAlignment="Center" Text="Add Task"></TextBlock>
         
-        <TextBlock Grid.Row="1" Grid.Column="0" FontSize="35" HorizontalAlignment="Left">Task Name </TextBlock>
-        
-        <TextBox Name="txtBusca" Grid.Row="2" Grid.Column="0" Width="350" HorizontalAlignment="Left"/>
-        <Button Name="btAdd" Width="104" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right"> Add </Button>
+        <Grid Grid.Row="1" Name="inputs">
+            <TextBox Name="txtNameInput" Width="376" HorizontalAlignment="Left"/>
+            <Button Name="btSave" Width="104" HorizontalAlignment="Right" Click="btSave_Click_1">Save</Button>
+        </Grid>
 
-        <TextBlock Grid.Row="3" FontSize="30" HorizontalAlignment="Left"> Lat.: Long.: </TextBlock>
-        <Button Name="btPickLocation" Grid.Row="4" HorizontalAlignment="Right">Pick Location</Button>
-
-        <TextBlock Grid.Row="5" FontSize="40" HorizontalAlignment="Center">Sub-Tasks</TextBlock>
-
-        <ListBox Name="lstResultado" Grid.Row="6">
+        <ListBox Name="lstResultado" Grid.Row="3">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -48,7 +39,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Margin="10" Text="{Binding description}" Grid.Row="0" Grid.Column="0"/>
+                        <TextBlock Margin="10" Text="{Binding Description}" Grid.Row="0" Grid.Column="0"/>
 
                         <Button Name="btEdit" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right">Edit</Button>
                     </Grid>
@@ -56,9 +47,11 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
+        <Button Name="btPickLocation" Grid.Row="4" HorizontalAlignment="Left">Pick Location</Button>
+
         <Button Name="btDelete" 
-                Grid.Row="7"
-                HorizontalAlignment="Center">
+                Grid.Row="4"
+                HorizontalAlignment="Right" Click="btDelete_Click">
             Delete Task
         </Button>
 

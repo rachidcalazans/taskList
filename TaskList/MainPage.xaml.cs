@@ -21,8 +21,14 @@ namespace TaskList
                 {
                     banco.CreateDatabase();
                 }
-                CarregarLista();
             }
+            CarregarLista();
+        }
+
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            CarregarLista();
         }
 
         public void CarregarLista()
@@ -41,6 +47,7 @@ namespace TaskList
             Task task = (Task)bt.DataContext; 
 
             App app = (App)Application.Current;
+
             app.AuxParam = task;
 
             NavigationService.Navigate(new Uri("/TaskView.xaml", UriKind.Relative));
@@ -48,34 +55,8 @@ namespace TaskList
 
         private void btSalvar_Click_1(object sender, RoutedEventArgs e)
         {
+            NavigationService.Navigate(new Uri("/TaskAdd.xaml", UriKind.Relative));
 
-            DateTimeFormatInfo dateInfoBr = new DateTimeFormatInfo();
-            dateInfoBr.ShortDatePattern = "dd/MM/yyyy";
-
-            //DateTime dataInicio = Convert.ToDateTime(datInicio.Value, dateInfoBr);
-            //DateTime dataTermino = Convert.ToDateTime(datTermino.Value, dateInfoBr);
-            
-            using (MyLocalDatabase banco = new MyLocalDatabase(MyLocalDatabase.ConnectionString))
-            {
-                Task task = new Task()
-                {
-                    Description = "Task 1",
-                    StartDate   = DateTime.Now,
-                    FinishDate  = DateTime.Now,
-                    Status      = 0
-                };
-                banco.Tasks.InsertOnSubmit(task);
-
-                SubTask subtask = new SubTask()
-                {
-                    Description = "Super tasdasfasdasdasdasfa asfdasdasfasdqweqwr",
-                    Status = 0,
-                    Task = task
-                };
-                banco.SubTasks.InsertOnSubmit(subtask);
-                banco.SubmitChanges();
-                CarregarLista();
-            }
         }
     }
       

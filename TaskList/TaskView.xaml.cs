@@ -35,7 +35,6 @@ namespace TaskList
                     List<SubTask> subTasks = (from subtask in banco.SubTasks where subtask.TaskId == task.Id select subtask).ToList();
                     lstResultado.ItemsSource = subTasks;
                 }
-                //lstResultado.ItemsSource = task.SubTasks;
             }
         }
     }

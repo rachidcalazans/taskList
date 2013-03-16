@@ -17,12 +17,6 @@ namespace TaskList.DatabaseAccess
         public string Description { get; set; }
 
         [Column()]
-        public DateTime StartDate { get; set; }
-
-        [Column()]
-        public DateTime FinishDate { get; set; }
-
-        [Column()]
         public int Status { get; set; }
 
         private readonly EntitySet<GpsPoint> _gps = new EntitySet<GpsPoint>();
