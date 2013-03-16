@@ -16,16 +16,18 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Button Name="btBack" Width="100" Grid.Row="0" HorizontalAlignment="Left"> Back  </Button>
         <TextBlock Grid.Row="0" FontSize="50"  HorizontalAlignment="Center"> View Task</TextBlock>
+        <TextBlock Grid.Row="1" FontSize="30" HorizontalAlignment="Left" Name="txtDescription"></TextBlock>
         <Button Name="btEdit" Width="100"  Grid.Row="0"  HorizontalAlignment="Right"> Edit</Button>
 
-        <TextBlock Grid.Row="1" FontSize="40"  HorizontalAlignment="Center"> Sub-Tasks</TextBlock>
+        <TextBlock Grid.Row="2" FontSize="40"  HorizontalAlignment="Center"> Sub-Tasks</TextBlock>
 
-        <ListBox Name="lstResultado" Grid.Row="2">
+        <ListBox Name="lstResultado" Grid.Row="3">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>

@@ -42,7 +42,6 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-
     </Grid>
 
 </phone:PhoneApplicationPage>

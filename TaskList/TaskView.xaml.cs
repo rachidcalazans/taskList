@@ -19,6 +19,16 @@ namespace TaskList
         public TaskView()
         {
             InitializeComponent();
+            CarregarSubTask();
+        }
+
+        public void CarregarSubTask()
+        {
+            using (MyLocalDatabase banco = new MyLocalDatabase(MyLocalDatabase.ConnectionString))
+            {
+                List<SubTask> subtasks = (from subtask in banco.SubTasks select subtask).ToList();
+                lstResultado.ItemsSource = subtasks;
+            }
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
