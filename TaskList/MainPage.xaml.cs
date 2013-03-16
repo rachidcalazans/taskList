@@ -28,8 +28,8 @@ namespace TaskList
         {
             using (MyLocalDatabase banco = new MyLocalDatabase(MyLocalDatabase.ConnectionString))
             {
-                List<Task> tasks = (from task in banco.Tasks select task).ToList();
-                listaTasks.ItemsSource = tasks;
+                List<SubTask> subtasks = (from subtask in banco.SubTasks select subtask).ToList();
+                listaTasks.ItemsSource = subtasks;
             }
         }
 
@@ -41,6 +41,7 @@ namespace TaskList
 
             DateTime dataInicio = Convert.ToDateTime(datInicio.Value, dateInfoBr);
             DateTime dataTermino = Convert.ToDateTime(datTermino.Value, dateInfoBr);
+            
             using (MyLocalDatabase banco = new MyLocalDatabase(MyLocalDatabase.ConnectionString))
             {
                 Task task = new Task()
@@ -50,9 +51,15 @@ namespace TaskList
                     FinishDate  = dataTermino.Date,
                     Status      = 0
                 };
-
                 banco.Tasks.InsertOnSubmit(task);
 
+                SubTask subtask = new SubTask()
+                {
+                    Description = "Super subtask",
+                    Status = 0,
+                    Task = task
+                };
+                banco.SubTasks.InsertOnSubmit(subtask);
                 banco.SubmitChanges();
                 CarregarLista();
             }

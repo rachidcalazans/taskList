@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Linq;
 using System.Data.Linq.Mapping;
 using System.Linq;
 using System.Text;
@@ -16,5 +17,19 @@ namespace TaskList.DatabaseAccess
         public string Longitude { get; set; }
         [Column()]
         public string Latitude { get; set; }
+        [Column()]
+        public int TaskId { get; set; }
+
+        private EntityRef<Task> taskRef;
+
+        [Association(Storage = "taskRef", ThisKey = "TaskId", OtherKey = "Id", IsForeignKey = true)]
+        public Task Task
+        {
+            get { return this.taskRef.Entity; }
+            set
+            {
+                taskRef.Entity = value;
+            }
+        }
     }
 }
