@@ -34,7 +34,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Margin="10" Grid.Row="0" Grid.Column="0"  Text="{Binding description}"/>
+                        <TextBlock Margin="10" Grid.Row="0" Grid.Column="0"  Text="{Binding Description}"/>
                         <Button Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right"> Done/UnDone</Button>
                         
                     </Grid>

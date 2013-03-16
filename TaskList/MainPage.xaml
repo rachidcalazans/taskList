@@ -21,7 +21,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Button Name="btAdd" Width="100" Grid.Row="0" HorizontalAlignment="Left"> Add </Button>
+        <Button Name="btAdd" Width="100" Grid.Row="0" HorizontalAlignment="Left" Click="btSalvar_Click_1"> Add </Button>
         <TextBlock Grid.Row="0" FontSize="60" HorizontalAlignment="Center">  DoTask </TextBlock>
 
         <TextBlock Grid.Row="1" FontSize="40" HorizontalAlignment="Center">Tasks </TextBlock>
@@ -37,7 +37,7 @@
 
                         <TextBlock Margin="10" Text="{Binding Description}" Grid.Row="0" Grid.Column="0"/>
 
-                        <Button Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right"> View </Button>
+                        <Button Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Click="Button_Click"> View </Button>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

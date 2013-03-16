@@ -17,6 +17,8 @@ namespace TaskList
 {
     public partial class App : Application
     {
+        public object AuxParam;
+
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>

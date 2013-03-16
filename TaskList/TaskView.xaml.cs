@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
+using TaskList.DatabaseAccess;
 
 namespace TaskList
 {
@@ -18,6 +19,19 @@ namespace TaskList
         public TaskView()
         {
             InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            App app = Application.Current as App;
+            if (app.AuxParam != null && app.AuxParam.GetType() == typeof(Task))
+            {
+                Task task = (Task)app.AuxParam;
+                
+                lstResultado.ItemsSource = task.SubTasks;
+            }
         }
     }
 }
