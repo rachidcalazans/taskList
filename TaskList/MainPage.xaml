@@ -35,7 +35,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Margin="10" Text="{Binding description}" Grid.Row="0" Grid.Column="0"/>
+                        <TextBlock Margin="10" Text="{Binding Description}" Grid.Row="0" Grid.Column="0"/>
 
                         <Button Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right"> View </Button>
                     </Grid>

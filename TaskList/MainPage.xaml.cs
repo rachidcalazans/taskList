@@ -28,42 +28,42 @@ namespace TaskList
         {
             using (MyLocalDatabase banco = new MyLocalDatabase(MyLocalDatabase.ConnectionString))
             {
-                List<SubTask> subtasks = (from subtask in banco.SubTasks select subtask).ToList();
-                listaTasks.ItemsSource = subtasks;
+                List<Task> tasks = (from task in banco.Tasks select task).ToList();
+                lstResultado.ItemsSource = tasks;
             }
         }
 
-        private void btSalvar_Click_1(object sender, RoutedEventArgs e)
-        {
+        //private void btSalvar_Click_1(object sender, RoutedEventArgs e)
+        //{
 
-            DateTimeFormatInfo dateInfoBr = new DateTimeFormatInfo();
-            dateInfoBr.ShortDatePattern = "dd/MM/yyyy";
+        //    DateTimeFormatInfo dateInfoBr = new DateTimeFormatInfo();
+        //    dateInfoBr.ShortDatePattern = "dd/MM/yyyy";
 
-            DateTime dataInicio = Convert.ToDateTime(datInicio.Value, dateInfoBr);
-            DateTime dataTermino = Convert.ToDateTime(datTermino.Value, dateInfoBr);
+        //    //DateTime dataInicio = Convert.ToDateTime(datInicio.Value, dateInfoBr);
+        //    //DateTime dataTermino = Convert.ToDateTime(datTermino.Value, dateInfoBr);
             
-            using (MyLocalDatabase banco = new MyLocalDatabase(MyLocalDatabase.ConnectionString))
-            {
-                Task task = new Task()
-                {
-                    Description = txtDescricao.Text,
-                    StartDate   = dataInicio.Date,
-                    FinishDate  = dataTermino.Date,
-                    Status      = 0
-                };
-                banco.Tasks.InsertOnSubmit(task);
+        //    using (MyLocalDatabase banco = new MyLocalDatabase(MyLocalDatabase.ConnectionString))
+        //    {
+        //        Task task = new Task()
+        //        {
+        //            Description = txtDescricao.Text,
+        //            StartDate   = dataInicio.Date,
+        //            FinishDate  = dataTermino.Date,
+        //            Status      = 0
+        //        };
+        //        banco.Tasks.InsertOnSubmit(task);
 
-                SubTask subtask = new SubTask()
-                {
-                    Description = "Super subtask",
-                    Status = 0,
-                    Task = task
-                };
-                banco.SubTasks.InsertOnSubmit(subtask);
-                banco.SubmitChanges();
-                CarregarLista();
-            }
-        }
+        //        SubTask subtask = new SubTask()
+        //        {
+        //            Description = "Super subtask",
+        //            Status = 0,
+        //            Task = task
+        //        };
+        //        banco.SubTasks.InsertOnSubmit(subtask);
+        //        banco.SubmitChanges();
+        //        CarregarLista();
+        //    }
+        //}
     }
       
 }
