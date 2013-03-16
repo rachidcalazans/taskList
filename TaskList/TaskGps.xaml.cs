@@ -103,11 +103,11 @@ namespace TaskList
                 {
                     GpsPoint gps = banco.GpsPoints.Where(o => o.TaskId.Equals(task.Id)).First();
 
-                    if (gps != null)
+                    if (gps.Latitude != null)
                     { 
                         gpsPoint = gps;
-                        txtLat.Text = gpsPoint.Latitude;
-                        txtLong.Text = gpsPoint.Longitude;
+                        txtLat.Text = "Lat.: " + gps.Latitude;
+                        txtLong.Text = "Long.: " + gps.Longitude;
                     }
                 }
             }

@@ -29,23 +29,8 @@ namespace TaskList
             base.OnNavigatedFrom(e);
             if (e.NavigationMode != System.Windows.Navigation.NavigationMode.Back)
             {
-<<<<<<< HEAD
                 State["taskName"] = txtNameInput.Text;
-=======
-                if (task == null)
-                {
-                    task = new Task()
-                    {
-                        Description = txtNameInput.Text,
-                        Status = 0
-                    };
-                    //task.Description = txtNameInput.Text;
-                }
-                //MessageBox.Show("Des. 2: " + task.Description);
-                //State["task"] = task;
 
-                State["task"] = txtNameInput.Text;
->>>>>>> Alterações
             }
         }
 
@@ -125,10 +110,10 @@ namespace TaskList
                 {
                     GpsPoint gps = banco.GpsPoints.Where(o => o.TaskId.Equals(task.Id)).First();
 
-                    if (gps != null)
+                    if (gps.Latitude != null)
                     {
-                        txtLat.Text = gps.Latitude;
-                        txtLong.Text = gps.Longitude;
+                        txtLat.Text = "Lat.: "+gps.Latitude;
+                        txtLong.Text = "Long.: "+gps.Longitude;
                     }
                 }
 
