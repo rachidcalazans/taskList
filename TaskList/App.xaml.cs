@@ -64,6 +64,16 @@ namespace TaskList
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            if (ShellTile.ActiveTiles.Count() <= 0)
+            {
+                StandardTileData data = new StandardTileData()
+                {
+                    Title = "TaskList",
+                    BackgroundImage = new Uri("background.png", UriKind.Relative)
+                };
+
+                ShellTile.Create(new Uri("/MainPage.xaml", UriKind.Relative), data);
+            }
         }
 
         // Code to execute when the application is activated (brought to foreground)

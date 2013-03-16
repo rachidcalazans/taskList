@@ -29,7 +29,23 @@ namespace TaskList
             base.OnNavigatedFrom(e);
             if (e.NavigationMode != System.Windows.Navigation.NavigationMode.Back)
             {
+<<<<<<< HEAD
                 State["taskName"] = txtNameInput.Text;
+=======
+                if (task == null)
+                {
+                    task = new Task()
+                    {
+                        Description = txtNameInput.Text,
+                        Status = 0
+                    };
+                    //task.Description = txtNameInput.Text;
+                }
+                //MessageBox.Show("Des. 2: " + task.Description);
+                //State["task"] = task;
+
+                State["task"] = txtNameInput.Text;
+>>>>>>> Alterações
             }
         }
 
@@ -91,7 +107,6 @@ namespace TaskList
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-
             if (State.ContainsKey("taskName"))
             {
                 txtNameInput.Text = State["taskName"].ToString();

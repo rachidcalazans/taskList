@@ -56,6 +56,7 @@ namespace TaskList
         private void CheckBox_Click(object sender, RoutedEventArgs e)
         {
             Button bt = (Button)sender;
+            rotateAnimation(bt);
 
             SubTask subTask = (SubTask)bt.DataContext;
 
@@ -88,6 +89,21 @@ namespace TaskList
                 bt.Background = new SolidColorBrush(Colors.Green);
             }
 
+        }
+
+        public void rotateAnimation(Button bt)
+        {
+            DoubleAnimation anima = new DoubleAnimation();
+            anima.From = 0;
+            anima.To = 180;
+            anima.Duration = new Duration(TimeSpan.FromSeconds(0.5));
+            SkewTransform skew = bt.RenderTransform as SkewTransform;
+            Storyboard.SetTarget(anima, skew);
+            Storyboard.SetTargetProperty(anima,
+            new PropertyPath(SkewTransform.AngleXProperty));
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(anima);
+            storyboard.Begin();
         }
 
         private void ApplicationBarIconButton_Click_1(object sender, EventArgs e)
