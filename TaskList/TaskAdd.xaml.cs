@@ -11,6 +11,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using TaskList.DatabaseAccess;
+using System.Device.Location;
 
 namespace TaskList
 {

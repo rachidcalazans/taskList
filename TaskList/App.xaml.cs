@@ -12,12 +12,17 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using System.Device.Location;
+using System.Windows.Threading;
+using TaskList.DatabaseAccess;
 
 namespace TaskList
 {
     public partial class App : Application
     {
         public object AuxParam;
+        private DispatcherTimer timer = new DispatcherTimer();
+        private GeoCoordinateWatcher geo = new GeoCoordinateWatcher();
 
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
@@ -58,12 +63,65 @@ namespace TaskList
                 // and consume battery power when the user is not using the phone.
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
+
+            timer.Interval = new TimeSpan(0, 0, 5);
+            timer.Tick += new EventHandler(timer_Tick);
+            timer.Start();
+
+            geo.Start();
+        }
+
+        void timer_Tick(object sender, EventArgs e)
+        {
+            GeoCoordinate coord = geo.Position.Location;
+            string msgAlert = "Task has to be done at this location:";
+            bool podeMandarMsg = false;
+            if (coord.IsUnknown != true)
+            {
+                using (MyLocalDatabase banco = new MyLocalDatabase(MyLocalDatabase.ConnectionString))
+                {
+                    List<GpsPoint> gpsList = (from gpspoint in banco.GpsPoints select gpspoint).ToList();
+                    //MessageBox.Show("geoList= " + gpsList.Count());
+
+                    foreach (var item in gpsList)
+                    {
+                        double metros = coord.GetDistanceTo(new GeoCoordinate(Double.Parse(item.Latitude), Double.Parse(item.Longitude)));
+                        if (metros < 40.0)
+                        {
+                            Task t = banco.Tasks.Where(o => o.Id.Equals(item.TaskId)).First();
+                            List<SubTask> subTasks = (from subtask in banco.SubTasks where subtask.TaskId == t.Id select subtask).ToList();
+                   
+                            msgAlert = msgAlert + Environment.NewLine + " Task: " + t.Description;
+
+                            foreach (var subTask in subTasks)
+                            {
+                                if (subTask.Alert == 1)
+                                {
+                                    podeMandarMsg = true;
+                                    msgAlert = msgAlert + Environment.NewLine + "   SubTask => " + subTask.Description;
+                                    subTask.Alert = 0;
+                                    banco.SubmitChanges();
+                                }
+                            }
+
+                        }
+                    }
+
+                }
+            }
+            if (podeMandarMsg)
+            {
+                MessageBox.Show(msgAlert);
+            }
+            podeMandarMsg = false;
         }
 
         // Code to execute when the application is launching (eg, from Start)
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+           
+
             if (ShellTile.ActiveTiles.Count() <= 0)
             {
                 StandardTileData data = new StandardTileData()
@@ -80,12 +138,19 @@ namespace TaskList
         // This code will not execute when the application is first launched
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
+            timer.Start();
+
+            geo.Start();
+
         }
 
         // Code to execute when the application is deactivated (sent to background)
         // This code will not execute when the application is closing
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
+            timer.Start();
+
+            geo.Start();
         }
 
         // Code to execute when the application is closing (eg, user hit Back)
