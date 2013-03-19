@@ -1,8 +1,9 @@
-﻿<phone:PhoneApplicationPage 
+﻿<phone:PhoneApplicationPage Style="{StaticResource TurnstilePage}"
     x:Class="TaskList.TaskView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -35,13 +36,10 @@
                             <ColumnDefinition Width="110"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock FontSize="30" FontWeight="Bold" Margin="10" Grid.Row="0" Grid.Column="0"  Text="{Binding Description}"/>
+                        <TextBlock FontSize="25" FontWeight="Bold" Margin="10" Grid.Row="0" Grid.Column="0"  Text="{Binding Description}"/>
                         <Button Name="btDone" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" 
                                 Click="CheckBox_Click" Background="{Binding Color}" Content="Done"
-                                RenderTransformOrigin="0.5 0.5">
-                            <Button.RenderTransform>
-                                <SkewTransform />
-                            </Button.RenderTransform>
+                                toolkit:TiltEffect.IsTiltEnabled="True">
                         </Button>
 
                     </Grid>

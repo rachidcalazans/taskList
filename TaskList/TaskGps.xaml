@@ -14,7 +14,7 @@
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True">
 
-    <Grid>
+    <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -22,17 +22,18 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <TextBlock Foreground="Black" Grid.Row="0" FontSize="23" HorizontalAlignment="Center">Add Location</TextBlock>
 
-        <Button Name="btBack" Width="104" Grid.Row="0" HorizontalAlignment="Left" Click="btBack_Click">Back</Button>
-        <TextBlock Grid.Row="0" FontSize="40" HorizontalAlignment="Center">Add Locatoin</TextBlock>
-       
-        <TextBlock Grid.Row="1" Grid.Column="0" FontSize="35" HorizontalAlignment="Center">Pick on Map</TextBlock>
+        <TextBlock Foreground="Black" Grid.Row="1" Grid.Column="0" FontSize="23" HorizontalAlignment="Center">Pick on Map</TextBlock>
 
-        <TextBlock Name="txtLat" Grid.Row="2" FontSize="30" Margin="12" HorizontalAlignment="Left">Lat.:</TextBlock>
-        <TextBlock Name="txtLong" Grid.Row="3" FontSize="30" Margin="12" HorizontalAlignment="Left">Long.:</TextBlock>
-
-        <my:Map Grid.Row="4" Name="mapa"/>
-
+        <TextBlock Foreground="Black" Name="txtAddress" Grid.Row="2" FontSize="25" Margin="12" HorizontalAlignment="Center"></TextBlock>
+        
+        <my:Map Grid.Row="4" Name="mapa" AnimationLevel="Full" ZoomLevel="7"/>
+        <ProgressBar Foreground="Red" Name="pgrsGps" Grid.Row="4" IsIndeterminate="true" VerticalAlignment="Center" />
     </Grid>
-
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar>
+            <shell:ApplicationBarIconButton IconUri="/Icons/appbar.back.rest.png" Text="Back" Click="ApplicationBarIconButton_Click_1"></shell:ApplicationBarIconButton>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

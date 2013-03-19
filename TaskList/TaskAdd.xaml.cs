@@ -12,6 +12,8 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using TaskList.DatabaseAccess;
 using System.Device.Location;
+using System.Runtime.Serialization.Json;
+using TaskList.WebService;
 
 namespace TaskList
 {
@@ -83,16 +85,36 @@ namespace TaskList
             using (MyLocalDatabase banco = new MyLocalDatabase(MyLocalDatabase.ConnectionString))
             {
                 List<GpsPoint> gpsList = (from gpspoint in banco.GpsPoints where gpspoint.TaskId == task.Id select gpspoint).ToList();
-
                 if (gpsList.Count > 0)
                 {
-                    txtLat.Text = "Lat.: " + gpsList[0].Latitude;
-                    txtLong.Text = "Long.: " + gpsList[0].Longitude;
+                    showAddress(gpsList.Last());
                 }
 
                 List<SubTask> subTasks = (from subtask in banco.SubTasks where subtask.TaskId == task.Id select subtask).ToList();
 
                 lstResultado.ItemsSource = subTasks;
+            }
+        }
+
+        private void showAddress(GpsPoint point)
+        {               
+            string URL = "http://dev.virtualearth.net/REST/v1/Locations/" + point.Latitude + ","+point.Longitude+"?o=json&key=AkTjmP71KlW6dUMUX1h7vD98Tpn02-K36swYe1peSSuw12TkpgRG3bmU7GBT612D";
+            WebClient client = new WebClient();
+            client.OpenReadCompleted += client_OpenReadCompleted;
+            client.OpenReadAsync(new Uri(URL, UriKind.Absolute));
+        }
+
+        void client_OpenReadCompleted(object sender, OpenReadCompletedEventArgs e)
+        {
+            try
+            {
+                DataContractJsonSerializer serial = new DataContractJsonSerializer(typeof(GpsLocation));
+                GpsLocation gps = (GpsLocation)serial.ReadObject(e.Result);
+                txtAddress.Text = gps.ResourceSets.First().Resources.First().Address;
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message);
             }
         }
 

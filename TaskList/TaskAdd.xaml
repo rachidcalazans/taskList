@@ -1,4 +1,4 @@
-﻿<phone:PhoneApplicationPage 
+﻿<phone:PhoneApplicationPage Style="{StaticResource TurnstilePage}"
     x:Class="TaskList.TaskAdd"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -36,7 +36,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBox Grid.Row="0" Name="txtNameInput" Width="402" HorizontalAlignment="Left"/>
+            <TextBox Grid.Row="0" Name="txtNameInput" Width="402" HorizontalAlignment="Left" MaxLength="23" />
             <Button Name="btSave" Width="95" Height="90" HorizontalAlignment="Right" Click="btSave_Click_1" Foreground="#FF2D993D" Background="#FF44D724" BorderThickness="2,1,1,1">
                 <Image Height="48" Width="48" Grid.Row="0" Source="/Icons/appbar.save.rest.png"></Image>
             </Button>
@@ -55,6 +55,12 @@
                             <Border.Background>
                                 <SolidColorBrush Color="#FF66A9EF"></SolidColorBrush>
                             </Border.Background>
+                            <Border.BorderBrush>
+                                <SolidColorBrush Color="White"></SolidColorBrush>
+                            </Border.BorderBrush>
+                            <Border.BorderThickness>
+                                <Thickness>0 0 0 1</Thickness>
+                            </Border.BorderThickness>
                         </Border>
 
                         <TextBlock Foreground="White" FontSize="25" FontWeight="Bold"  Margin="10" Text="{Binding Description}" Grid.Row="0" Grid.Column="0" Tap="TextBlock_Tap_1"/>
@@ -63,8 +69,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <TextBlock Name="txtLat" Grid.Row="4" FontSize="30" Margin="12" HorizontalAlignment="Left" Foreground="Black">Lat.:</TextBlock>
-        <TextBlock Name="txtLong" Grid.Row="5" FontSize="30" Margin="12" HorizontalAlignment="Left" Foreground="Black">Long.:</TextBlock>
+        <TextBlock Name="txtAddress" Grid.Row="4" FontSize="25" Margin="12" HorizontalAlignment="Left" Foreground="Black"></TextBlock>
 
         <Button Name="btLocation" Content="Pick Location" Grid.Row="6" Click="btLocation_Click" Background="#FF006C66"/>
     </Grid>

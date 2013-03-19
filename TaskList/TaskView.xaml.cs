@@ -39,7 +39,7 @@ namespace TaskList
                     {
                         if (subTask.Status == 0)
                         {
-                            subTask.Color = new SolidColorBrush(Colors.Black);
+                            subTask.Color = new SolidColorBrush(Colors.Red);
                         }
                         else
                         {
@@ -56,14 +56,13 @@ namespace TaskList
         private void CheckBox_Click(object sender, RoutedEventArgs e)
         {
             Button bt = (Button)sender;
-            rotateAnimation(bt);
 
             SubTask subTask = (SubTask)bt.DataContext;
 
             if (subTask.Status == 0)
             {
                 subTask.Status = 1;
-                bt.Background = new SolidColorBrush(Colors.Black);
+                bt.Background = new SolidColorBrush(Colors.Red);
             }
             else
             {
@@ -82,7 +81,7 @@ namespace TaskList
 
             if (s.Status == 0)
             {
-                bt.Background = new SolidColorBrush(Colors.Black);
+                bt.Background = new SolidColorBrush(Colors.Red);
             }
             else
             {
@@ -95,12 +94,12 @@ namespace TaskList
         {
             DoubleAnimation anima = new DoubleAnimation();
             anima.From = 0;
-            anima.To = 180;
+            anima.To = 360;
             anima.Duration = new Duration(TimeSpan.FromSeconds(0.5));
-            SkewTransform skew = bt.RenderTransform as SkewTransform;
+            RotateTransform skew = bt.RenderTransform as RotateTransform;
             Storyboard.SetTarget(anima, skew);
             Storyboard.SetTargetProperty(anima,
-            new PropertyPath(SkewTransform.AngleXProperty));
+            new PropertyPath(RotateTransform.AngleProperty));
             Storyboard storyboard = new Storyboard();
             storyboard.Children.Add(anima);
             storyboard.Begin();

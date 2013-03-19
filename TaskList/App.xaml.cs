@@ -40,7 +40,8 @@ namespace TaskList
 
             // Standard Silverlight initialization
             InitializeComponent();
-
+            
+            RootFrame = new TransitionFrame();
             // Phone-specific initialization
             InitializePhoneApplication();
 
@@ -66,7 +67,7 @@ namespace TaskList
 
             timer.Interval = new TimeSpan(0, 0, 5);
             timer.Tick += new EventHandler(timer_Tick);
-            timer.Start();
+            //timer.Start();
 
             geo.Start();
         }
@@ -118,19 +119,18 @@ namespace TaskList
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
-           
-
-            if (ShellTile.ActiveTiles.Count() <= 0)
+            if (ShellTile.ActiveTiles.Count() <= 1)
             {
                 StandardTileData data = new StandardTileData()
                 {
-                    Title = "Task List",
+                    Title = "TaskList",
                     BackgroundImage = new Uri("Gps.png", UriKind.Relative)
                 };
-
                 ShellTile.Create(new Uri("/MainPage.xaml", UriKind.Relative), data);
             }
         }
+
+        public void teste() { }
 
         // Code to execute when the application is activated (brought to foreground)
         // This code will not execute when the application is first launched

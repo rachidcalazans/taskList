@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using System.Windows.Media;
 using Microsoft.Phone.Shell;
+using Krempel.WP7.Core.Controls;
 
 namespace TaskList
 {
@@ -60,6 +61,8 @@ namespace TaskList
                 List<Task> tasks = (from task in banco.Tasks select task).ToList();
                 lstResultado.ItemsSource = tasks;
             }
+
+            ItemTurnstileTransition.SetItemContinuumMode(lstResultado as UIElement, ContinuumModeEnum.ForwardOutBackwardIn);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

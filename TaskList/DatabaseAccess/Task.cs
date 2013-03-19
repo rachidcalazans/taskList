@@ -13,7 +13,7 @@ namespace TaskList.DatabaseAccess
         [Column(IsDbGenerated=true, IsPrimaryKey=true)]
         public int Id { get; set; }
 
-        [Column()]
+        [Column(CanBeNull = false,DbType = "NVarChar(23) NOT NULL")]
         public string Description { get; set; }
 
         [Column()]

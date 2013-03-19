@@ -11,7 +11,7 @@ namespace TaskList.DatabaseAccess
         [Column(IsDbGenerated=true, IsPrimaryKey=true)]
         public int Id { get; set; }
 
-        [Column()]
+        [Column(DbType = "NVarChar(29) NOT NULL")]
         public String Description { get; set; }
 
         [Column()]
@@ -20,7 +20,7 @@ namespace TaskList.DatabaseAccess
         [Column()]
         public int Status { get; set; }
 
-        [Column()]
+        [Column(CanBeNull=false)]
         public int TaskId { get; set; }
 
         public SolidColorBrush Color { get; set; }
