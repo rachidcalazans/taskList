@@ -90,15 +90,13 @@ namespace TaskList
                         {
                             Task t = banco.Tasks.Where(o => o.Id.Equals(item.TaskId)).First();
                             List<SubTask> subTasks = (from subtask in banco.SubTasks where subtask.TaskId == t.Id select subtask).ToList();
-                   
-                            msgAlert = msgAlert + Environment.NewLine + " Task: " + t.Description;
-
+                  
                             foreach (var subTask in subTasks)
                             {
                                 if (subTask.Alert == 1)
                                 {
                                     podeMandarMsg = true;
-                                    msgAlert = msgAlert + Environment.NewLine + "   SubTask => " + subTask.Description;
+                                    msgAlert = msgAlert + Environment.NewLine +  " Task: " + t.Description+ ", SubTask => " + subTask.Description;
                                     subTask.Alert = 0;
                                     banco.SubmitChanges();
                                 }
@@ -126,8 +124,8 @@ namespace TaskList
             {
                 StandardTileData data = new StandardTileData()
                 {
-                    Title = "TaskList",
-                    BackgroundImage = new Uri("background.png", UriKind.Relative)
+                    Title = "Task List",
+                    BackgroundImage = new Uri("Gps.png", UriKind.Relative)
                 };
 
                 ShellTile.Create(new Uri("/MainPage.xaml", UriKind.Relative), data);
